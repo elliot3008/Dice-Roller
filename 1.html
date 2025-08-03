@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-dark">
+    <nav class="navbar bg-secondary navbar-expand mx-auto" style="max-width: 500px;">
+        <div class="container">
+            <span class="navbar-text mx-auto text-light">
+                ROLL A DICE~
+            </span>
+        </div>
+    </nav>
+    <div class="container bg-white py-3 text-center" style="max-width: 500px;">
+        <button class="btn btn-dark my-4" onclick="result()">Roll Now</button>
+        <h1>Your result will appear here!</h1>
+        <div id="resultBox" class="mx-auto my-4 py-3 fs-5" style="height: 200px; background-color: rgb(197, 197, 197); display: flex; align-items: center; justify-content: center;">
+
+        </div>
+        <a class="text-success fs-4 text-decoration-none" onclick="howToPlay()" title="CLICK ME!" href="#">How does this "game" works?</a>
+        <p id="howToPlayBox" class="mt-3 d-none">This is a simple "game" made with javascript functions. Click <b>Roll Now</b> button on top of the page to start playing. This will randomly generate <b>two numbers(From 1 to 6)</b> each for you and the computer(aka your opponent). You have to <b>get a higher number than the computer</b> to win the game. Best of Luck to you!</p>
+    </div>
+    <script>
+
+        function rand(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function result() {
+
+            const computerRoll = rand(1,6);
+            const userRoll = rand(1,6);
+            display = "";
+            const resultBox = document.getElementById('resultBox');
+
+            if(computerRoll > userRoll) {
+                display = `You rolled ${userRoll} and the computer rolled ${computerRoll}.\n Aint no ways bro lost to a computer.`
+
+                style = 'bg-danger';
+            } else if(userRoll > computerRoll) {
+                display = `You rolled ${userRoll} and the computer rolled ${computerRoll}.\n Congratulation! Here's a digital cookie for you!`
+
+                style = 'bg-success';
+            } else {
+                display = `You both rolled ${userRoll} so there's no winner\n BUT that also means there's no loser either!`
+
+                style = 'bg-secondary';
+            }
+
+            resultBox.innerText = display;
+            resultBox.className = style;
+        }
+
+        function howToPlay() {
+            const how = document.getElementById('howToPlayBox');
+            how.classList.toggle('d-none');
+        }
+    </script>
+</body>
+</html> 
